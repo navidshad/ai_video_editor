@@ -12,7 +12,9 @@
   "dependencies": {
     "add": "^2.0.6",
     "fluent-ffmpeg": "^2.1.2",
+    "langchain": "^0.0.212",
     "openai": "^4.24.1",
+    "web-streams-polyfill": "^3.2.1",
     "yarn": "^1.22.21"
   },
   "devDependencies": {

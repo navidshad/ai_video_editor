@@ -1,11 +1,12 @@
 import OpenAI from "openai";
 import fs from "fs";
+import { writeTextFile } from "./fs-utils";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-export async function getTranscript(
+export async function storeTranscript(
   soundFilePath: string,
   outputFilePath: string,
   language: string
@@ -22,9 +23,7 @@ export async function getTranscript(
     })
     .then((transcript) => {
       // write transcript to file
-      fs.writeFile(outputFilePath, transcript as any, (err) => {
-        if (err) throw err;
-        console.log("The file has been saved!");
-      });
+      writeTextFile(outputFilePath, transcript as any);
+      console.log("The file has been saved!");
     });
 }
