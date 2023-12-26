@@ -1,0 +1,24 @@
+{
+  "name": "ai_video_editor",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/navidshad/ai_video_editor.git",
+  "author": "Navid Shad <navidshad72@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "add": "^2.0.6",
+    "fluent-ffmpeg": "^2.1.2",
+    "openai": "^4.24.1",
+    "yarn": "^1.22.21"
+  },
+  "devDependencies": {
+    "@types/fluent-ffmpeg": "^2.1.24",
+    "@types/node": "^20.10.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
