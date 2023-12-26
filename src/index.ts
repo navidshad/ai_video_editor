@@ -1,9 +1,8 @@
-import fs from "fs";
 import path from "path";
-import { readAllVideos } from "./fs-utils";
-import { convertToSound } from "./ffmpeg-utils";
-import { getTranscript } from "./ai-utils";
-import { sleep } from "./promise-utils";
+import { readAllVideos } from "./utils/fs-utils";
+import { convertToSound } from "./utils/ffmpeg-utils";
+import { getTranscript } from "./utils/ai-utils";
+import { sleep } from "./utils/promise-utils";
 
 const videosRoot = path.join(__dirname, "../videos");
 
