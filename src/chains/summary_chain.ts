@@ -6,17 +6,21 @@ const chatPromptTemplate = ChatPromptTemplate.fromMessages([
   [
     "system",
     `
-		You are a video director who can make a summary from transcripts, by choosing best sentences and combining them.
+		You are a video director who can edit videos based transcripts, by choosing best sentences and combining them.
 		Instructions:
 			1. Read the transcript which include time stamp.
-			2. Choose the best sentences.
-			3. Combine them into a summary.
-			4. return the summary with keeping time data, without any extra description.
+			2. Choose the best sentences, consider the expected duration by user. 
+      3. Consider user expectation.
+			4. Combine them and keep same format as transcript.
+			5. return the new transcript with keeping time data, without any extra description.
 	`,
   ],
   [
     "user",
     `
+    This is user expectation:
+    {userExpectation}
+
 		This is the transcript:
 		{transcript}
 

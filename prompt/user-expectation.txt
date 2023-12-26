@@ -1,0 +1,2 @@
+- Don't pick one sentence, take few ones to retains semantic coherence.
+- I need a 3 minutes summary.

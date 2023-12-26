@@ -17,6 +17,9 @@ import { gettimeCutsFromTranscript } from "./utils/transcript.util";
 
 const videosRoot = path.join(__dirname, "../videos");
 
+const tempRoot = path.join(__dirname, "../tmp");
+createFolder(tempRoot);
+
 async function main() {
   //
   // 1. Reading a list of videos
@@ -29,7 +32,7 @@ async function main() {
     const videoPath = path.join(videosRoot, allVideos[i]);
 
     const soundOutputFileName = path.join(
-      videosRoot,
+      tempRoot,
       allVideos[i].split(".")[0] + ".mp3"
     );
 
@@ -42,7 +45,7 @@ async function main() {
     }
 
     const transcriptFileName = path.join(
-      videosRoot,
+      tempRoot,
       allVideos[i].split(".")[0] + ".srt"
     );
 
@@ -60,15 +63,18 @@ async function main() {
     const transcript = readTextFile(transcriptFileName);
 
     const summaryFileName = path.join(
-      videosRoot,
+      tempRoot,
       allVideos[i].split(".")[0] + ".summary.srt"
     );
 
     if (!isFileExist(summaryFileName)) {
       console.log("Getting transcript summary for", transcriptFileName);
-      await summaryChain.invoke({ transcript }).then((summary) => {
-        writeTextFile(summaryFileName, summary.text);
-      });
+      const userExpectation = readTextFile("./prompt/user-expectation.txt");
+      await summaryChain
+        .invoke({ transcript, userExpectation })
+        .then((summary) => {
+          writeTextFile(summaryFileName, summary.text);
+        });
     }
 
     // 5. cute out the video based on the summary time data.
@@ -79,7 +85,7 @@ async function main() {
     for (let timeIndex = 0; timeIndex < timeCuts.length; timeIndex++) {
       const timeCute = timeCuts[timeIndex];
 
-      const cutDirectory = path.join(videosRoot, videoName);
+      const cutDirectory = path.join(tempRoot, videoName);
       createFolder(cutDirectory);
 
       const cutFileName = path.join(
@@ -94,11 +100,11 @@ async function main() {
     }
 
     // 7. Merge all cut videos
-    const cutVideos = readAllVideos(path.join(videosRoot, videoName)).map(
-      (video) => path.join(videosRoot, videoName, video)
+    const cutVideos = readAllVideos(path.join(tempRoot, videoName)).map(
+      (video) => path.join(tempRoot, videoName, video)
     );
 
-    const mergePath = path.join(videosRoot, videoName + "_short.mp4");
+    const mergePath = path.join(tempRoot, videoName + "_short.mp4");
 
     if (!isFileExist(mergePath)) {
       console.log("Merging videos", cutVideos);

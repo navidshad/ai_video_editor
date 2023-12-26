@@ -1,3 +1,5 @@
 node_modules
 videos
+tmp/*
 .env
+.DS_Store
