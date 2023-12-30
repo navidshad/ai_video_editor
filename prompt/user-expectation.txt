@@ -1,2 +1,2 @@
-- Don't pick one sentence, take few ones to retains semantic coherence.
-- I need a 3 minutes summary.
+- Pick different part of transcript, each part should contains 5-20 sentences.
+- Make a better version of the video keep the context, and the long story, just remove gaps.

@@ -15,7 +15,9 @@ import { storeTranscript } from "./utils/ai-utils";
 import { summaryChain } from "./chains/summary_chain";
 import { gettimeCutsFromTranscript } from "./utils/transcript.util";
 
-const videosRoot = path.join(__dirname, "../videos");
+const videosRoot = path.join(
+  "/Users/navid-shad/Youtube_project/Making of Ai video editor"
+);
 
 const tempRoot = path.join(__dirname, "../tmp");
 createFolder(tempRoot);
@@ -25,7 +27,7 @@ async function main() {
   // 1. Reading a list of videos
   //
   console.log("Reading a list of videos");
-  const allVideos = readAllVideos();
+  const allVideos = readAllVideos(videosRoot);
 
   for (let i = 0; i < allVideos.length; i++) {
     const videoName = path.basename(allVideos[i].split(".")[0]);
@@ -60,7 +62,7 @@ async function main() {
     //
     // 4. Ask AI to generate a summary all transcripts and return it as a text file, and keeping the time data.
     //
-    const transcript = readTextFile(transcriptFileName);
+    const transcript = readTextFile(transcriptFileName).split("\n ").join("");
 
     const summaryFileName = path.join(
       tempRoot,

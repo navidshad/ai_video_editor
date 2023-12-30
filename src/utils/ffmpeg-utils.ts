@@ -4,6 +4,9 @@ import { createFolder } from "./fs-utils";
 export function convertToSound(videoPath: string, output: string) {
   return new Promise((done, reject) => {
     ffmpeg(videoPath)
+      .audioChannels(1)
+      .audioBitrate(64) // Decrease bitrate for lower quality
+      .audioFrequency(11025) // Decrease frequency for lower quality
       .output(output)
       .on("end", function () {
         done("done");

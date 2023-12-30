@@ -9,8 +9,7 @@ const chatPromptTemplate = ChatPromptTemplate.fromMessages([
 		You are a video director who can edit videos based transcripts, by choosing best sentences and combining them.
 		Instructions:
 			1. Read the transcript which include time stamp.
-			2. Choose the best sentences, consider the expected duration by user. 
-      3. Consider user expectation.
+			2. Choose different parts based user expectation.
 			4. Combine them and keep same format as transcript.
 			5. return the new transcript with keeping time data, without any extra description.
 	`,
@@ -31,7 +30,7 @@ const chatPromptTemplate = ChatPromptTemplate.fromMessages([
 
 const model = new OpenAIChat({
   openAIApiKey: process.env.OPENAI_API_KEY,
-  modelName: "gpt-4",
+  modelName: "gpt-4-1106-preview",
 });
 
 export const summaryChain = new LLMChain({
